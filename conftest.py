@@ -1,31 +1,18 @@
-import pytest
-from selenium import webdriver
+import pytest  
+from selenium import webdriver  
+from selenium.webdriver.chrome.service import Service as ChromeService  
+# from webdriver_manager.chrome import ChromeDriverManager  
 
-
-
-# from selenium.webdriver import FirefoxOptions as Options
-
-
-# hook for pytest plugin
-def pytest_html_report_title(report):
-    report.title = "Inpatient Test Automation Report"
-
-
-# fixture for tests
-@pytest.fixture
-def inpatient_app():
-
-    # #Headless browser - necessary for CI/CD
-    # options = Options()
-    # options.add_argument("--headless")
-    # driver = webdriver.Firefox(options=options)
-
-    driver = webdriver.Firefox()
-
-    # 1. Prestep. Navigate to GithubAPP
-
-    # generators in python
-
-
-    # PostStep. Close the App
-
+@pytest.fixture(scope='session')
+def driver():
+    options = webdriver.ChromeOptions()
+    options.add_argument("start-maximized")
+    options.add_argument("--disable-search-engine-choice-screen")
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    options.add_experimental_option("prefs", { \
+    "profile.default_content_setting_values.media_stream_mic": 1, 
+    "profile.default_content_setting_values.media_stream_camera": 1, 
+})
+    driver = webdriver.Chrome(options=options)
+    yield driver
+    driver.quit()
