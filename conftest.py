@@ -16,3 +16,8 @@ def driver():
     driver = webdriver.Chrome(options=options)
     yield driver
     driver.quit()
+
+
+# hook for pytest plugin
+def pytest_html_report_title(report):
+    report.title = "Bedside Test Automation Report"
