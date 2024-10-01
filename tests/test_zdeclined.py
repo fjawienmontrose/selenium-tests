@@ -29,7 +29,7 @@ def test_audiocall(driver):
     fcm_page = FcmPage(driver)
     fcm_page.enter_token("eUV1yw0KQaefKvqJT-ES0w:APA91bERTirrX35AKSMWfBb0_MPQyv4-qiiEtkx53OYwVzG6KdmavjBWFnhDnFO81vnLYN56cAojIhYc-IpvdRvMnRi9gyq7I3Vz507DvrhQtGwogoJuld1E-QI_yH5uuSGkoz8N-7fJ")
     fcm_page.click_call()
-
+    fcm_page.static_sleep()
     driver.switch_to.new_window('tab')
 
     url = "https://inpatient-video-dev.nyumc.org/"
